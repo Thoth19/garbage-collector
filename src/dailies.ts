@@ -203,11 +203,9 @@ function prepFamiliars(): void {
   if (have($familiar`Robortender`)) {
     // Omit the nora if we aren't going to go to the Sea. If we have another reason to go to
     // the Sea, this logic will get a bit more hairy.
-    if (((itemAmount($item`fishy pipe`) === 0) || (get(_fishyPipeUsed) != false)) && 
-      (!have($effect`Fishy`))) {
-      robortDrinksList = `Newark, drive-by shooting, Feliz Navidad, single entendre`
-    } else {
-      robortDrinksList = `Newark, drive-by shooting, Feliz Navidad, single entendre, Bloody Nora`
+    const robortDrinksList = $items`Newark, drive-by shooting, Feliz Navidad, single entendre`;
+    if ((have($item`fishy pipe`) && get("_fishyPipeUsed") === false) || have($effect`Fishy`)) {
+      robortDrinksList.push($item`Bloody Nora`);
     }
     for (const drink of robortDrinksList) {
       if (get("_roboDrinks").includes(drink.name)) continue;
